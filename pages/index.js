@@ -41,6 +41,9 @@ export default function Home({ allPostsData }) {
             </li>
           ))}
         </ul>
+        <Link href={`/weather`}>
+          <a>Weather</a>
+        </Link>
       </section>
     </Layout>
   );
