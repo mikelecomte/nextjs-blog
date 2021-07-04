@@ -22,28 +22,32 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>
-          (This is a sample website - you’ll be building a site like this on{" "}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
+          Messing around with stuff based on{" "}
+          <a href="https://nextjs.org/learn">the Next.js tutorial</a>
         </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <h2 className={utilStyles.headingLg}>Tests</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
-              </Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
+          <li className={utilStyles.listItem} key={`/weather`}>
+            <Link href={`/weather`}>
+              <a>Weather</a>
+            </Link>
+            <br />
+            <small className={utilStyles.lightText}>
+              Fetch weather using SSR
+            </small>
+          </li>
+          <li className={utilStyles.listItem} key={`/weather2`}>
+            <Link href={`/weather2`}>
+              <a>Weather2</a>
+            </Link>
+            <br />
+            <small className={utilStyles.lightText}>
+              Fetch weather using API and SWR
+            </small>
+          </li>
         </ul>
-        <Link href={`/weather`}>
-          <a>Weather</a>
-        </Link>
       </section>
     </Layout>
   );
