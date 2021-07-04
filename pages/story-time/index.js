@@ -29,14 +29,15 @@ export async function getStaticProps() {
 
   const messages = await db
     .collection("messages")
-    .find({})
+    .find({}, { projection: { _id: 0 } })
     .sort({ submissionId: 1 })
     .limit(1000)
     .toArray();
 
   return {
     props: {
-      messages: JSON.parse(JSON.stringify(messages)),
+      messages: messages,
     },
+    revalidate: 60, // In seconds
   };
 }
