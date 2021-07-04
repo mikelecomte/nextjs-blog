@@ -56,7 +56,7 @@ export default function Home({ allPostsData }) {
             <br />
             <small className={utilStyles.lightText}>
               Fetch top 1000 Story Time messages from Mongo DB using Static
-              Generation
+              Generation, with 60 second Incremental Static Regeneration
             </small>
           </li>
         </ul>
