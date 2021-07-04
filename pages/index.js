@@ -35,7 +35,8 @@ export default function Home({ allPostsData }) {
             </Link>
             <br />
             <small className={utilStyles.lightText}>
-              Fetch weather using SSR
+              Fetch weather data from Open Weather Map using Server-side
+              Rendering
             </small>
           </li>
           <li className={utilStyles.listItem} key={`/weather2`}>
@@ -44,7 +45,18 @@ export default function Home({ allPostsData }) {
             </Link>
             <br />
             <small className={utilStyles.lightText}>
-              Fetch weather using API and SWR
+              Fetch weather data from Open Weather Map using API route and
+              Client-side Rendering
+            </small>
+          </li>
+          <li className={utilStyles.listItem} key={`/story-time`}>
+            <Link href={`/story-time`}>
+              <a>Story Time</a>
+            </Link>
+            <br />
+            <small className={utilStyles.lightText}>
+              Fetch top 1000 Story Time messages from Mongo DB using Static
+              Generation
             </small>
           </li>
         </ul>
