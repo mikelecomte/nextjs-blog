@@ -1,5 +1,3 @@
-import Head from "next/head";
-import Layout, { siteTitle } from "../../components/layout";
 import utilStyles from "../../styles/utils.module.css";
 
 export async function getServerSideProps(context) {
@@ -21,16 +19,11 @@ export async function getServerSideProps(context) {
 
 export default function Weather({ data }) {
   return (
-    <Layout>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
-      <section className={utilStyles.headingMd}>
-        <p>
-          The weather is {data.current.weather[0].main}. The current temperature
-          is {data.current.temp} but it feels like {data.current.feels_like}!
-        </p>
-      </section>
-    </Layout>
+    <section className={utilStyles.headingMd}>
+      <p>
+        The weather is {data.current.weather[0].main}. The current temperature
+        is {data.current.temp} but it feels like {data.current.feels_like}!
+      </p>
+    </section>
   );
 }

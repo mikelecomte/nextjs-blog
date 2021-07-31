@@ -1,5 +1,3 @@
-import Head from "next/head";
-import Layout, { siteTitle } from "../../components/layout";
 import utilStyles from "../../styles/utils.module.css";
 import useSWR from "swr";
 import { dateFromTimestamp } from "../../components/date";
@@ -15,10 +13,7 @@ export default function Weather2() {
   if (!data) return <div>loading...</div>;
 
   return (
-    <Layout>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+    <>
       <section className={utilStyles.headingMd}>
         <p>
           The weather is {data.current.weather[0].main}°. The current
@@ -42,6 +37,6 @@ export default function Weather2() {
           </section>
         );
       })}
-    </Layout>
+    </>
   );
 }
