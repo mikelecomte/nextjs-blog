@@ -13,6 +13,7 @@
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-flexbox-grid": "^2.1.2",
     "swr": "^0.5.6"
   }
 }

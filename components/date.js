@@ -7,5 +7,5 @@ export default function Date({ dateString }) {
 
 export const dateFromTimestamp = (timeStamp) => {
   const date = fromUnixTime(timeStamp);
-  return <time dateTime={date}>{format(date, "LLLL d, yyyy")}</time>; 
-}
+  return <time dateTime={date}>{format(date, "cccc, LLLL d")}</time>;
+};
