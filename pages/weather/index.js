@@ -5,6 +5,12 @@ import Image from "next/image";
 import useSWR from "swr";
 import { dateFromTimestamp } from "../../components/date";
 import { Grid, Row, Col } from "react-flexbox-grid/dist/react-flexbox-grid";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowUp,
+  faArrowDown,
+  faUmbrella,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Weather2() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -38,40 +44,53 @@ export default function Weather2() {
           </div>
         </div>
       </section>
-      <hr />
-
       <section>
         <div className={utilStyles.weatherSummary}>
           <h3 className={utilStyles.headingMd}>Forecast</h3>
         </div>
         <Grid fluid>
-          <Row>
+          <Row className={utilStyles.forecastContainer}>
             {data.daily.map((day) => {
               return (
-                <Col xs={6} md={3} key={day.dt}>
+                <Col
+                  xs={6}
+                  md={3}
+                  key={day.dt}
+                  className={utilStyles.forecastItem}
+                >
                   <b>{dateFromTimestamp(day.dt)}</b>
-                  <ul className={utilStyles.list}>
-                    <li className={utilStyles.listItem}>
-                      <Image
-                        priority
-                        src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
-                        className={utilStyles.borderCircle}
-                        height={100}
-                        width={100}
-                        alt={day.weather[0].main}
-                      />
-                    </li>
-                    <li className={utilStyles.listItem}>
-                      <small className={utilStyles.lightText}>
-                        <b>Lo</b> {day.temp.min}°
-                      </small>
-                    </li>
-                    <li className={utilStyles.listItem}>
-                      <small className={utilStyles.lightText}>
-                        <b>Hi</b> {day.temp.max}°
-                      </small>
-                    </li>
-                  </ul>
+                  <div className={utilStyles.forecastItemDetail}>
+                    <div className={utilStyles.forecastItemDetailInner}>
+                      <div>
+                        <Image
+                          priority
+                          src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                          className={utilStyles.borderCircle}
+                          height={100}
+                          width={100}
+                          alt={day.weather[0].main}
+                        />
+                      </div>
+                      <div>
+                        <small className={utilStyles.lightText}>
+                          <FontAwesomeIcon icon={faArrowUp} />{" "}
+                          {Math.round(day.temp.max)}°
+                        </small>
+                      </div>
+                      <div>
+                        <small className={utilStyles.lightText}>
+                          <FontAwesomeIcon icon={faArrowDown} />{" "}
+                          {Math.round(day.temp.min)}°
+                        </small>
+                      </div>
+                      <div>
+                        <small className={utilStyles.lightText}>
+                          <FontAwesomeIcon icon={faUmbrella} />{" "}
+                          {`${Number(day.pop * 100)}%`}
+                        </small>
+                      </div>
+                    </div>
+                  </div>
                 </Col>
               );
             })}

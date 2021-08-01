@@ -1,11 +1,20 @@
-import { parseISO, format, fromUnixTime } from "date-fns";
-
-export default function Date({ dateString }) {
-  const date = parseISO(dateString);
-  return <time dateTime={dateString}>{format(date, "LLLL d, yyyy")}</time>;
-}
+import { format, fromUnixTime } from "date-fns";
 
 export const dateFromTimestamp = (timeStamp) => {
   const date = fromUnixTime(timeStamp);
-  return <time dateTime={date}>{format(date, "cccc, LLLL d")}</time>;
+
+  if (isToday(date)) {
+    return <time dateTime={date}>Today</time>;
+  }
+
+  return <time dateTime={date}>{format(date, "cccc")}</time>;
+};
+
+const isToday = (someDate) => {
+  const today = new Date();
+  return (
+    someDate.getDate() === today.getDate() &&
+    someDate.getMonth() === today.getMonth() &&
+    someDate.getFullYear() === today.getFullYear()
+  );
 };

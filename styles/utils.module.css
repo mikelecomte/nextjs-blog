@@ -61,3 +61,23 @@
   align-items: center;
   justify-content: center;
 }
+
+.forecastItem {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.forecastItemDetail {
+  text-align: center;
+}
+
+.forecastItemDetailInner {
+  display: inline-block;
+  text-align: left;
+}
+
+.forecastContainer {
+  background-color: #fafafa;
+  border-style: solid;
+  border-width: thin;
+}
