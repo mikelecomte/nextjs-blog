@@ -21,20 +21,35 @@ export default function Weather2() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
-        <p>
-          {`The weather is ${data.current.weather[0].main}. The current temperature is ${data.current.temp}° but it feels like ${data.current.feels_like}°!`}
-        </p>
+      <section>
+        <div className={utilStyles.weatherSummary}>
+          <h3 className={utilStyles.headingMd}>Kitchener, ON</h3>
+          <div className={utilStyles.currentWeather}>
+            <Image
+              priority
+              src={`http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png`}
+              className={utilStyles.borderCircle}
+              height={100}
+              width={100}
+              alt={data.current.weather[0].main}
+            />
+
+            {`Feels like ${data.current.feels_like}°!`}
+          </div>
+        </div>
       </section>
-      <Grid fluid>
-        <Row>
-          {data.daily.map((day) => {
-            return (
-              <Col xs={6} md={3} key={day.dt}>
-                <section className={utilStyles.headingMd}>
-                  <p>
-                    <b>{dateFromTimestamp(day.dt)}</b>
-                  </p>
+      <hr />
+
+      <section>
+        <div className={utilStyles.weatherSummary}>
+          <h3 className={utilStyles.headingMd}>Forecast</h3>
+        </div>
+        <Grid fluid>
+          <Row>
+            {data.daily.map((day) => {
+              return (
+                <Col xs={6} md={3} key={day.dt}>
+                  <b>{dateFromTimestamp(day.dt)}</b>
                   <ul className={utilStyles.list}>
                     <li className={utilStyles.listItem}>
                       <Image
@@ -57,12 +72,12 @@ export default function Weather2() {
                       </small>
                     </li>
                   </ul>
-                </section>
-              </Col>
-            );
-          })}
-        </Row>
-      </Grid>
+                </Col>
+              );
+            })}
+          </Row>
+        </Grid>
+      </section>
     </Layout>
   );
 }

@@ -50,3 +50,14 @@
 .lightText {
   color: #666;
 }
+
+.weatherSummary {
+  text-align: center;
+}
+
+.currentWeather {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

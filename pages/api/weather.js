@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   const owmData = await fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?lat=43.451637&lon=-80.492531&appid=${process.env.WEATHER_KEY}&units=metric`
+    `https://api.openweathermap.org/data/2.5/onecall?lat=43.451637&lon=-80.492531&appid=${process.env.WEATHER_KEY}&units=metric&exclude=minutely,hourly`
   );
   const data = await owmData.json();
 
