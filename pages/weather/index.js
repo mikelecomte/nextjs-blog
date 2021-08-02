@@ -39,8 +39,7 @@ export default function Weather2() {
               width={100}
               alt={data.current.weather[0].main}
             />
-
-            {`Feels like ${data.current.feels_like}°!`}
+            {`Feels like ${data.current.feels_like}°`}
           </div>
         </div>
       </section>
@@ -60,35 +59,33 @@ export default function Weather2() {
                 >
                   <b>{dateFromTimestamp(day.dt)}</b>
                   <div className={utilStyles.forecastItemDetail}>
-                    <div className={utilStyles.forecastItemDetailInner}>
-                      <div>
-                        <Image
-                          priority
-                          src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
-                          className={utilStyles.borderCircle}
-                          height={100}
-                          width={100}
-                          alt={day.weather[0].main}
-                        />
-                      </div>
-                      <div>
-                        <small className={utilStyles.lightText}>
-                          <FontAwesomeIcon icon={faArrowUp} />{" "}
-                          {Math.round(day.temp.max)}°
-                        </small>
-                      </div>
-                      <div>
-                        <small className={utilStyles.lightText}>
-                          <FontAwesomeIcon icon={faArrowDown} />{" "}
-                          {Math.round(day.temp.min)}°
-                        </small>
-                      </div>
-                      <div>
-                        <small className={utilStyles.lightText}>
-                          <FontAwesomeIcon icon={faUmbrella} />{" "}
-                          {`${Number(day.pop * 100)}%`}
-                        </small>
-                      </div>
+                    <div>
+                      <Image
+                        priority
+                        src={`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`}
+                        className={utilStyles.borderCircle}
+                        height={100}
+                        width={100}
+                        alt={day.weather[0].main}
+                      />
+                    </div>
+                    <div>
+                      <small className={utilStyles.lightText}>
+                        <FontAwesomeIcon icon={faArrowUp} />{" "}
+                        {Math.round(day.temp.max)}°
+                      </small>
+                    </div>
+                    <div>
+                      <small className={utilStyles.lightText}>
+                        <FontAwesomeIcon icon={faArrowDown} />{" "}
+                        {Math.round(day.temp.min)}°
+                      </small>
+                    </div>
+                    <div>
+                      <small className={utilStyles.lightText}>
+                        <FontAwesomeIcon icon={faUmbrella} />{" "}
+                        {`${Math.round(Number(day.pop * 100))}%`}
+                      </small>
                     </div>
                   </div>
                 </Col>
