@@ -77,3 +77,13 @@
   border-width: thin;
   text-align: center;
 }
+
+.forecastLink {
+  margin: 1rem 0 0;
+  padding: 0 8px;
+}
+
+.forecastItemHourly {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

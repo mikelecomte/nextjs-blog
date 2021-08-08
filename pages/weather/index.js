@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import Layout, { siteTitle } from "../../components/layout";
 import utilStyles from "../../styles/utils.module.css";
 import Image from "next/image";
@@ -12,10 +13,10 @@ import {
   faUmbrella,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Weather2() {
+export default function Weather() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const baseUrl = "/api/weather";
+  const baseUrl = "/api/weather/daily";
 
   const { data, error } = useSWR(baseUrl, fetcher);
 
@@ -45,7 +46,7 @@ export default function Weather2() {
       </section>
       <section>
         <div className={utilStyles.weatherSummary}>
-          <h3 className={utilStyles.headingMd}>Forecast</h3>
+          <h3 className={utilStyles.headingMd}>Daily Forecast</h3>
         </div>
         <Grid fluid>
           <Row className={utilStyles.forecastContainer}>
@@ -94,6 +95,11 @@ export default function Weather2() {
           </Row>
         </Grid>
       </section>
+      <div className={utilStyles.forecastLink}>
+        <Link href={`/weather/hourly`}>
+          <a>Hourly forecast</a>
+        </Link>
+      </div>
     </Layout>
   );
 }
