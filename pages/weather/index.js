@@ -58,7 +58,9 @@ export default function Weather() {
                   key={day.dt}
                   className={utilStyles.forecastItem}
                 >
-                  <b>{dateFromTimestamp(day.dt)}</b>
+                  <div>
+                    <b>{dateFromTimestamp(day.dt)}</b>
+                  </div>
                   <div className={utilStyles.forecastItemDetail}>
                     <div>
                       <Image

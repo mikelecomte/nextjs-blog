@@ -1,15 +1,13 @@
 import { format, fromUnixTime } from "date-fns";
 
-export const dateFromTimestamp = (timeStamp, withTime = false) => {
+export const dateFromTimestamp = (timeStamp, timeOnly = false) => {
   const date = fromUnixTime(timeStamp);
 
-  if (!withTime && isToday(date)) {
+  if (!timeOnly && isToday(date)) {
     return <time dateTime={date}>Today</time>;
   }
 
-  return (
-    <time dateTime={date}>{format(date, withTime ? "ccc p" : "cccc")}</time>
-  );
+  return <time dateTime={date}>{format(date, timeOnly ? "p" : "cccc")}</time>;
 };
 
 const isToday = (someDate) => {

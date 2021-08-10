@@ -14,7 +14,16 @@ export default function Hourly() {
 
   const { data, error } = useSWR(baseUrl, fetcher);
 
-  if (error) return <div>failed to load</div>;
+  const weekdays = new Array(7);
+  weekdays[0] = "Sunday";
+  weekdays[1] = "Monday";
+  weekdays[2] = "Tuesday";
+  weekdays[3] = "Wednesday";
+  weekdays[4] = "Thursday";
+  weekdays[5] = "Friday";
+  weekdays[6] = "Saturday";
+
+  if (error) return <div>{error}</div>;
   if (!data) return <div>loading...</div>;
 
   return (
@@ -41,30 +50,35 @@ export default function Hourly() {
       <section>
         <div className={utilStyles.weatherSummary}>
           <h3 className={utilStyles.headingMd}>Next 48 Hours</h3>
-          <Grid fluid>
-            <Row>
-              {data.hourly.map((hour) => (
-                <Col
-                  xs={6}
-                  md={4}
-                  key={hour.dt}
-                  className={utilStyles.forecastItemHourly}
-                >
-                  <div>{dateFromTimestamp(hour.dt, true)}</div>
-                  <div>
-                    <small className={utilStyles.lightText}>
-                      {Math.round(Number(hour.temp))}°
-                    </small>
-                  </div>
-                  <div>
-                    <small className={utilStyles.lightText}>
-                      {hour.weather[0].description}
-                    </small>
-                  </div>
-                </Col>
-              ))}
-            </Row>
-          </Grid>
+          {Object.keys(data.hourly).map((day) => (
+            <div key={day}>
+              <h3 className={utilStyles.headingMd}>{weekdays[day]}</h3>
+              <Grid fluid>
+                <Row>
+                  {data.hourly[day].map((hour) => (
+                    <Col
+                      xs={6}
+                      md={4}
+                      key={hour.dt}
+                      className={utilStyles.forecastItemHourly}
+                    >
+                      <div>{dateFromTimestamp(hour.dt, true)}</div>
+                      <div>
+                        <small className={utilStyles.lightText}>
+                          {Math.round(Number(hour.temp))}°
+                        </small>
+                      </div>
+                      <div>
+                        <small className={utilStyles.lightText}>
+                          {hour.weather[0].description}
+                        </small>
+                      </div>
+                    </Col>
+                  ))}
+                </Row>
+              </Grid>
+            </div>
+          ))}
         </div>
       </section>
       <div className={utilStyles.forecastLink}>
