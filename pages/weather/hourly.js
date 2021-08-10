@@ -50,6 +50,7 @@ export default function Hourly() {
       <section>
         <div className={utilStyles.weatherSummary}>
           <h3 className={utilStyles.headingMd}>Next 48 Hours</h3>
+          {console.log(data)}
           {Object.keys(data.hourly).map((day) => (
             <div key={day}>
               <h3 className={utilStyles.headingMd}>{weekdays[day]}</h3>
