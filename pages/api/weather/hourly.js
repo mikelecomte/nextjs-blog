@@ -5,30 +5,6 @@ export default async function handler(req, res) {
 
   const data = await owmData.json();
 
-  if (data) {
-    data.hourly.forEach((h) => {
-      const date = new Date(h.dt * 1000);
-      const day = date.getDay();
-
-      h.day = day;
-    });
-
-    const days = data.hourly.map((h) => h.day);
-
-    const dataWithDays = days.reduce(
-      (acc, curr) => ((acc[curr] = {}), acc),
-      {}
-    );
-
-    const keys = Object.keys(dataWithDays);
-
-    keys.forEach((k) => {
-      dataWithDays[k] = data.hourly.filter((h) => h.day === Number(k));
-    });
-
-    data.hourly = dataWithDays;
-  }
-
   if (!data) {
     res.status(404).json({ text: "no weather lol" });
   }
