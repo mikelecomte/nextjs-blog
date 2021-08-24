@@ -14,24 +14,17 @@ export default function Hourly() {
 
   const { data, error } = useSWR(baseUrl, fetcher);
 
-  const weekdays = new Array(7);
-  weekdays[0] = "Sunday";
-  weekdays[1] = "Monday";
-  weekdays[2] = "Tuesday";
-  weekdays[3] = "Wednesday";
-  weekdays[4] = "Thursday";
-  weekdays[5] = "Friday";
-  weekdays[6] = "Saturday";
-
   if (error) return <div>{error}</div>;
   if (!data) return <div>loading...</div>;
 
   if (data && !data.processed) {
     data.hourly.forEach((h) => {
       const date = new Date(h.dt * 1000);
-      const day = date.getDay();
 
-      h.day = day;
+      h.day = date.getDay();
+      h.formattedDay = date.toLocaleString("default", {
+        weekday: "long",
+      });
     });
 
     const days = data.hourly.map((h) => h.day);
@@ -75,10 +68,11 @@ export default function Hourly() {
       <section>
         <div className={utilStyles.weatherSummary}>
           <h3 className={utilStyles.headingMd}>Next 48 Hours</h3>
-          {console.log(data)}
           {Object.keys(data.hourly).map((day) => (
             <div key={day}>
-              <h3 className={utilStyles.headingMd}>{weekdays[day]}</h3>
+              <h3 className={utilStyles.headingMd}>
+                {data.hourly[day][0].formattedDay}
+              </h3>
               <Grid fluid>
                 <Row>
                   {data.hourly[day].map((hour) => (
