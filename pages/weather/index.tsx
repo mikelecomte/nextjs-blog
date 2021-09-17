@@ -14,7 +14,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Weather() {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (url) => fetch(url).then((res) => res.json());
 
   const baseUrl = "/api/weather/daily";
 
@@ -24,7 +24,7 @@ export default function Weather() {
   if (!data) return <div>loading...</div>;
 
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>{siteTitle}</title>
       </Head>

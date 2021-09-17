@@ -4,10 +4,10 @@ export const dateFromTimestamp = (timeStamp, timeOnly = false) => {
   const date = fromUnixTime(timeStamp);
 
   if (!timeOnly && isToday(date)) {
-    return <time dateTime={date}>Today</time>;
+    return <time dateTime={date.toString()}>Today</time>;
   }
 
-  return <time dateTime={date}>{format(date, timeOnly ? "p" : "cccc")}</time>;
+  return <time dateTime={date.toString()}>{format(date, timeOnly ? "p" : "cccc")}</time>;
 };
 
 const isToday = (someDate) => {
