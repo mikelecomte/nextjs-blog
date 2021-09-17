@@ -8,7 +8,7 @@ import { dateFromTimestamp } from "../../components/date";
 import { Grid, Row, Col } from "react-flexbox-grid/dist/react-flexbox-grid";
 
 export default function Hourly() {
-  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const fetcher = (url) => fetch(url).then((res) => res.json());
 
   const baseUrl = "/api/weather/hourly";
 
@@ -45,7 +45,7 @@ export default function Hourly() {
   }
 
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>{siteTitle}</title>
       </Head>

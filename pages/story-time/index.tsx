@@ -1,11 +1,12 @@
 import Head from "next/head";
+import { GetStaticProps } from 'next'
 import Layout, { siteTitle } from "../../components/layout";
 import { connectToDatabase } from "../../util/mongodb";
 import utilStyles from "../../styles/utils.module.css";
 
 export default function StoryTime({ messages }) {
   return (
-    <Layout>
+    <Layout home={false}>
       <Head>
         <title>{siteTitle}</title>
       </Head>
@@ -24,7 +25,7 @@ export default function StoryTime({ messages }) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const { db } = await connectToDatabase();
 
   const messages = await db
