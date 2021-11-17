@@ -13,8 +13,25 @@ import {
   faUmbrella,
 } from "@fortawesome/free-solid-svg-icons";
 
+interface Day {
+  dt: number;
+  weather: Weather[];
+  temp: Temp;
+  pop: number;
+}
+
+interface Weather {
+  icon: string;
+  main: string;
+}
+
+interface Temp {
+  min: number;
+  max: number;
+}
+
 export default function Weather() {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const baseUrl = "/api/weather/daily";
 
@@ -50,7 +67,7 @@ export default function Weather() {
         </div>
         <Grid fluid>
           <Row className={utilStyles.forecastContainer}>
-            {data.daily.map((day) => {
+            {data.daily.map((day: Day) => {
               return (
                 <Col
                   xs={6}

@@ -1,10 +1,14 @@
 import Head from "next/head";
-import { GetStaticProps } from 'next'
+import { GetStaticProps } from "next";
 import Layout, { siteTitle } from "../../components/layout";
 import { connectToDatabase } from "../../util/mongodb";
 import utilStyles from "../../styles/utils.module.css";
 
-export default function StoryTime({ messages }) {
+interface Message {
+  text: string;
+}
+
+export default function StoryTime({ messages }: { messages: Message[] }) {
   return (
     <Layout home={false}>
       <Head>
@@ -41,4 +45,4 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     revalidate: 60, // In seconds
   };
-}
+};

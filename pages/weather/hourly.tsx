@@ -7,8 +7,21 @@ import useSWR from "swr";
 import { dateFromTimestamp } from "../../components/date";
 import { Grid, Row, Col } from "react-flexbox-grid/dist/react-flexbox-grid";
 
+interface Hour {
+  dt: number;
+  day: number;
+  formattedDay: string;
+  weather: Weather[];
+  temp: number;
+  pop: number;
+}
+
+interface Weather {
+  description: string;
+}
+
 export default function Hourly() {
-  const fetcher = (url) => fetch(url).then((res) => res.json());
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   const baseUrl = "/api/weather/hourly";
 
@@ -18,7 +31,7 @@ export default function Hourly() {
   if (!data) return <div>loading...</div>;
 
   if (data && !data.processed) {
-    data.hourly.forEach((h) => {
+    data.hourly.forEach((h: Hour) => {
       const date = new Date(h.dt * 1000);
 
       h.day = date.getDay();
@@ -27,7 +40,7 @@ export default function Hourly() {
       });
     });
 
-    const days = data.hourly.map((h) => h.day);
+    const days = data.hourly.map((h: Hour) => h.day);
 
     const dataWithDays = days.reduce(
       (acc, curr) => ((acc[curr] = {}), acc),
@@ -37,7 +50,7 @@ export default function Hourly() {
     const keys = Object.keys(dataWithDays);
 
     keys.forEach((k) => {
-      dataWithDays[k] = data.hourly.filter((h) => h.day === Number(k));
+      dataWithDays[k] = data.hourly.filter((h: Hour) => h.day === Number(k));
     });
 
     data.hourly = dataWithDays;
@@ -75,7 +88,7 @@ export default function Hourly() {
               </h3>
               <Grid fluid>
                 <Row>
-                  {data.hourly[day].map((hour) => (
+                  {data.hourly[day].map((hour: Hour) => (
                     <Col
                       xs={6}
                       md={4}
